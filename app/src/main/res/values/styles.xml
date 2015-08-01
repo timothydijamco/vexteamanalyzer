@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="GoButton" parent="Base.Widget.AppCompat.Button">>
+        <item name="android:background">@drawable/go_button_selector</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+</resources>

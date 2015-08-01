@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionBarColor">#D99E14</color>
+    <drawable name="goButtonColor">#93b057</drawable>
+    <drawable name="goButtonPressedColor">#a4bf6b</drawable>
+</resources>
