@@ -46,6 +46,7 @@ public class ProcessActivity extends ActionBarActivity {
     private List<Event> events = new ArrayList<Event>();
     private Team team;
     private Spinner chartSpinner;
+    private String seasonReadable;
     private int chartSelected = 0;
 
     @Override
@@ -55,7 +56,7 @@ public class ProcessActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         String teamNumber = intent.getStringExtra(MainActivity.TEAM_NUMBER).toUpperCase();
-        String seasonReadable = intent.getStringExtra(MainActivity.SEASON);
+        seasonReadable = intent.getStringExtra(MainActivity.SEASON);
         String season = seasonReadable.replace(" ","%20");
         team = new Team(teamNumber);
 
@@ -331,12 +332,20 @@ public class ProcessActivity extends ActionBarActivity {
                             chart2.setInteractive(false);
 
                             Viewport v = new Viewport(chart1.getCurrentViewport());
+                            Viewport v2 = new Viewport(chart1.getCurrentViewport());
                             v.bottom = 0;
-                            v.top = 100;
+                            v2.bottom = 0;
+                            v2.top = 100;
+                            if (seasonReadable.equalsIgnoreCase("Skyrise")) {
+                                v.top = 100;
+                            } else if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
+                                v.top = 300;
+                            }
+
                             chart1.setCurrentViewport(v);
                             chart1.setMaximumViewport(v);
-                            chart2.setCurrentViewport(v);
-                            chart2.setMaximumViewport(v);
+                            chart2.setCurrentViewport(v2);
+                            chart2.setMaximumViewport(v2);
                             break;
                         case "skills":
                             Log.i(TAG, "Processing skills...");
@@ -372,15 +381,26 @@ public class ProcessActivity extends ActionBarActivity {
                             textValue = (TextView) findViewById(R.id.awardsCount);
                             textValue.setText("(" + String.valueOf(team.getAwardCount()) + ")");
 
+
+                            // Temporary hack to fix problem with chart settings not updating:
                             LineChartView c1 = (LineChartView) findViewById(R.id.chart);
                             LineChartView c2 = (LineChartView) findViewById(R.id.chart2);
+
                             Viewport vp = new Viewport(c1.getCurrentViewport());
+                            Viewport vp2 = new Viewport(c1.getCurrentViewport());
                             vp.bottom = 0;
-                            vp.top = 100;
+                            vp2.bottom = 0;
+                            vp2.top = 100;
+                            if (seasonReadable.equalsIgnoreCase("Skyrise")) {
+                                vp.top = 100;
+                            } else if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
+                                vp.top = 300;
+                            }
+
                             c1.setCurrentViewport(vp);
                             c1.setMaximumViewport(vp);
-                            c2.setCurrentViewport(vp);
-                            c2.setMaximumViewport(vp);
+                            c2.setCurrentViewport(vp2);
+                            c2.setMaximumViewport(vp2);
                             break;
                     }
 
@@ -411,7 +431,7 @@ public class ProcessActivity extends ActionBarActivity {
         chart1Data.setLines(chart1Lines);
 
         Axis axisX = (new Axis(axisValues)).setHasLines(true).setTextColor(Color.DKGRAY); //new Axis(axisValues);
-        Axis chart1AxisY = Axis.generateAxisFromRange(0,100,10).setHasLines(true).setTextColor(Color.DKGRAY);
+        Axis chart1AxisY = Axis.generateAxisFromRange(0,300,10).setHasLines(true).setTextColor(Color.DKGRAY);
 
         axisX.setName("Date");
         chart1AxisY.setName("Average match score");
