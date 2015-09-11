@@ -214,7 +214,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get awards ====/
             try {
                 Log.i(TAG, "Getting awards...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_awards?team="+params[0]+"&season="+params[1]);
+                requestURL = new URL("http://api.vex.us.nallen.me/get_awards?team=\"+params[0]+\"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -249,10 +249,10 @@ public class ProcessActivity extends ActionBarActivity {
                             Log.i(TAG, "Processing events...");
                             for (int k = 0; k < resultArray.length(); k++) {
                             JSONObject resultObj = resultArray.getJSONObject(k);
-                                if (!resultObj.getString("start").substring(0,10).equals("0000-00-00")) {
-                                    events.add(new Event(resultObj.getString("sku"), resultObj.getString("start")));
-                                }
+                            if (!resultObj.getString("start").substring(0,10).equals("0000-00-00")) {
+                                events.add(new Event(resultObj.getString("sku"), resultObj.getString("start")));
                             }
+                        }
                             break;
                         case "rankings":
                             Log.i(TAG, "Processing rankings...");
@@ -481,5 +481,16 @@ public class ProcessActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveTeam(View view) {
+        DatabaseHandler dbh = new DatabaseHandler(this);
+        dbh.addTeam(team);
+    }
+    public void getTeam(View view) {
+        DatabaseHandler dbh = new DatabaseHandler(this);
+        Team testTeam = dbh.getTeam("1224S");
+        Log.i("TAG", testTeam.getTeamNumber() + " " + String.valueOf(testTeam.getMaxMatchScore()));
+        Toast.makeText(this, String.valueOf(testTeam.getMaxMatchScore()), Toast.LENGTH_LONG).show();
     }
 }

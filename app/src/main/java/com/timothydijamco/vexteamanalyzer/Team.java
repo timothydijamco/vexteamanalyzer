@@ -18,7 +18,10 @@ public class Team {
     private int wins;
     private int ties;
     private int losses;
+    private double winPercent;
+    private double avgRanking;
     private int maxMatchScore;
+    private double avgMatchScore;
     private int maxRobotSkills;
     private int maxProgrammingSkills;
     private List<Award> awards;
@@ -28,16 +31,29 @@ public class Team {
         this.teamNumber = teamNumber;
         events = new ArrayList<Event>();
         totalRankings = 0;
+        avgRanking = -1;
         totalScore = 0;
         matches = 0;
         competitionsAttended = 0;
         wins = 0;
         ties = 0;
         losses = 0;
+        winPercent = -1;
         maxMatchScore = 0;
+        avgMatchScore = -1;
         maxRobotSkills = 0;
         maxProgrammingSkills = 0;
         awards = new ArrayList<Award>();
+    }
+    public Team(String teamNumber, int competitionsAttended, double avgRanking, double winPercent, int maxMatchScore, double avgMatchScore, int maxRobotSkills, int maxProgrammingSkills) {
+        this.teamNumber = teamNumber;
+        this.competitionsAttended = competitionsAttended;
+        this.avgRanking = avgRanking;
+        this.winPercent = winPercent;
+        this.maxMatchScore = maxMatchScore;
+        this.avgMatchScore = avgMatchScore;
+        this.maxRobotSkills = maxRobotSkills;
+        this.maxProgrammingSkills = maxProgrammingSkills;
     }
 
     // Getters
@@ -97,13 +113,26 @@ public class Team {
     public void incrementLossesBy(int losses) { this.losses += losses; }
 
     // Calculators
-    public double calculateAvgMatchScore() { return ((double) totalScore)/matches;  }
-    public double calculateWinPercent() {
-        if ((wins+ties+losses)!=0) {
-            return (((double) wins)/(wins+ties+losses))*100;
-        } else {
-            return 0;
+    public double calculateAvgMatchScore() {
+        if (Math.abs(avgMatchScore - -1) < 0.01) {
+            avgMatchScore = ((double) totalScore) / matches;
         }
+        return avgMatchScore;
     }
-    public double calculateAvgRanking() { return ((double) totalRankings)/competitionsAttended; }
+    public double calculateWinPercent() {
+        if (Math.abs(winPercent - -1) < 0.01) {
+            if ((wins + ties + losses) != 0) {
+                winPercent = (((double) wins) / (wins + ties + losses)) * 100;
+            } else {
+                winPercent = 0;
+            }
+        }
+        return winPercent;
+    }
+    public double calculateAvgRanking() {
+        if (Math.abs(avgRanking - -1) < 0.01) {
+            avgRanking = ((double) totalRankings) / competitionsAttended;
+        }
+        return avgRanking;
+    }
 }
