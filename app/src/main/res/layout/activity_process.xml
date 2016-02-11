@@ -82,28 +82,6 @@
                         android:layout_toRightOf="@+id/averageRankingLabel"
                         android:text="@string/default_value"
                         android:textSize="16sp" />
-
-                    <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Get!"
-                        android:id="@+id/getButton"
-                        android:onClick="getTeam"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignLeft="@+id/averageRankingValue"
-                        android:layout_alignStart="@+id/averageRankingValue" />
-
-                    <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Save"
-                        android:onClick="saveTeam"
-                        android:id="@+id/saveButton"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toRightOf="@+id/competitionsAttendedValue"
-                        android:layout_toEndOf="@+id/competitionsAttendedValue" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 

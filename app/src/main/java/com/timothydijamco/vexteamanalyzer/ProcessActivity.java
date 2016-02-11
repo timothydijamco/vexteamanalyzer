@@ -40,8 +40,10 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class ProcessActivity extends ActionBarActivity {
     private static final String TAG = "ProcessActivityTag";
-    private int[] unixTimes = {1398902400,1401580800,1404172800,1406851200,1409529600,1412121600,1414800000,1417392000,1420070400,1422748800,1425168000,1427846400,1430438400};
-    private String[] labels = {"5/1/14","6/1/14","7/1/14","8/1/14","9/1/14","10/1/14","11/1/14","12/1/14","1/1/15","2/1/15","3/1/15","4/1/15","5/1/15"};
+    private int[] unixTimes = {1398902400,1401580800,1404172800,1406851200,1409529600,1412121600,1414800000,1417392000,1420070400,1422748800,1425168000,1427846400,1430438400,1433116800};
+    private int[] unixTimesNBN = {1430438400,1433116800,1435708800,1438387200,1441065600,1443657600,1446336000,1448928000,1451606400,1454284800,1456790400,1459468800,1462060800,1464739200};
+    private String[] labels =    {"5/1/14","6/1/14","7/1/14","8/1/14","9/1/14","10/1/14","11/1/14","12/1/14","1/1/15","2/1/15","3/1/15","4/1/15","5/1/15","6/1/15"};
+    private String[] labelsNBN = {"5/1/15","6/1/15","7/1/15","8/1/15","9/1/15","10/1/15","11/1/15","12/1/15","1/1/16","2/1/16","3/1/16","4/1/16","5/1/16","6/1/16"};
     private List<AxisValue> axisValues = new ArrayList<AxisValue>();
     private List<Event> events = new ArrayList<Event>();
     private Team team;
@@ -102,15 +104,21 @@ public class ProcessActivity extends ActionBarActivity {
 
         // Prepare axis values
         Log.i(TAG, "Preparing axis values...");
-        for (int k = 0; k < unixTimes.length; k++) {
-            axisValues.add(new AxisValue(unixTimes[k]).setLabel(labels[k]));
+        if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
+            for (int k = 0; k < unixTimesNBN.length; k++) {
+                axisValues.add(new AxisValue(unixTimesNBN[k]).setLabel(labelsNBN[k]));
+            }
+        } else {
+            for (int k = 0; k < unixTimes.length; k++) {
+                axisValues.add(new AxisValue(unixTimes[k]).setLabel(labels[k]));
+            }
         }
 
-        if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
+        /*if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
             chartSpinner.setVisibility(View.GONE);
             chart1Container.setVisibility(View.GONE);
             chart2Container.setVisibility(View.GONE);
-        }
+        }*/
 
         // Actionbar
         android.support.v7.app.ActionBar ab = getSupportActionBar();
@@ -214,7 +222,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get awards ====/
             try {
                 Log.i(TAG, "Getting awards...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_awards?team=\"+params[0]+\"&season="+params[1]);
+                requestURL = new URL("http://api.vex.us.nallen.me/get_awards?team="+params[0]+"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -418,6 +426,7 @@ public class ProcessActivity extends ActionBarActivity {
         List<PointValue> avgMatchScorePoints = new ArrayList<PointValue>();
         for (Event event : events) {
             if (event.calculateAverageScore() > 0.01) {
+                Log.i(TAG, "Adding point, " + event.getDate_inSeconds());
                 avgMatchScorePoints.add(new PointValue(event.getDate_inSeconds(), (float) event.calculateAverageScore()));
                 //points.get(points.size()-1).setLabel(event.getDate_inString());
             }

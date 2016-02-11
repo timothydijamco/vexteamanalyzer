@@ -1,48 +1,31 @@
 package com.timothydijamco.vexteamanalyzer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.app.Fragment;
-import android.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     public final static String TEAM_NUMBER = "com.timothydijamco.vexteamanalyzer.TEAM_NUMBER";
     public final static String SEASON = "com.timothydijamco.vexteamanalyzer.SEASON";
-    ActionBar.Tab tab1, tab2;
-    Fragment fragmentTab1 = new FragmentSearchTab();
-    Fragment fragmentTab2 = new FragmentSearchTab();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
 
-        ActionBar ab = getActionBar();
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#CF9611"));
-        // ab.setBackgroundDrawable(colorDrawable);
-        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        tab1 = ab.newTab().setText("Search");
-        tab2 = ab.newTab().setText("Saved");
-
-        tab1.setTabListener(new MyTabListener(fragmentTab1));
-        tab2.setTabListener(new MyTabListener(fragmentTab2));
-
-        ab.addTab(tab1);
-        ab.addTab(tab2);
+        ab.setBackgroundDrawable(colorDrawable);
 
         Button submit = (Button) findViewById(R.id.button);
     }

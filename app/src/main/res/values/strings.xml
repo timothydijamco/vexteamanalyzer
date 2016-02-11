@@ -28,8 +28,8 @@
         <item>Win percent over time</item>
     </string-array>
     <string-array name="season_options">
-        <item>Skyrise</item>
         <item>Nothing But Net</item>
+        <item>Skyrise</item>
     </string-array>
 
 <!-- TODO: Remove or change this placeholder text -->
