@@ -142,7 +142,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get events ====/
             try {
                 Log.i(TAG, "Getting events...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_events?team="+params[0]+"&season="+params[1]);
+                requestURL = new URL("http://api.vexdb.io/v1/get_events?team="+params[0]+"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -162,7 +162,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get rankings ====/
             try {
                 Log.i(TAG, "Getting rankings...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_rankings?team="+params[0]+"&season="+params[1]);
+                requestURL = new URL("http://api.vexdb.io/v1/get_rankings?team="+params[0]+"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -182,7 +182,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get matches ====/
             try {
                 Log.i(TAG, "Getting matches...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_matches?team="+params[0]+"&season="+params[1]);
+                requestURL = new URL("http://api.vexdb.io/v1/get_matches?team="+params[0]+"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -202,7 +202,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get skills ====/
             try {
                 Log.i(TAG, "Getting skills...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_skills?team="+params[0]+"&season="+params[1]);
+                requestURL = new URL("http://api.vexdb.io/v1/get_skills?team="+params[0]+"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -222,7 +222,7 @@ public class ProcessActivity extends ActionBarActivity {
             //==== Get awards ====/
             try {
                 Log.i(TAG, "Getting awards...");
-                requestURL = new URL("http://api.vex.us.nallen.me/get_awards?team="+params[0]+"&season="+params[1]);
+                requestURL = new URL("http://api.vexdb.io/v1/get_awards?team="+params[0]+"&season="+params[1]);
 
                 con = requestURL.openConnection();
                 StringBuilder sb = new StringBuilder();
@@ -347,7 +347,7 @@ public class ProcessActivity extends ActionBarActivity {
                             if (seasonReadable.equalsIgnoreCase("Skyrise")) {
                                 v.top = 100;
                             } else if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
-                                v.top = 300;
+                                v.top = 360;
                             }
 
                             chart1.setCurrentViewport(v);
@@ -402,7 +402,7 @@ public class ProcessActivity extends ActionBarActivity {
                             if (seasonReadable.equalsIgnoreCase("Skyrise")) {
                                 vp.top = 100;
                             } else if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
-                                vp.top = 300;
+                                vp.top = 360;
                             }
 
                             c1.setCurrentViewport(vp);
@@ -440,7 +440,7 @@ public class ProcessActivity extends ActionBarActivity {
         chart1Data.setLines(chart1Lines);
 
         Axis axisX = (new Axis(axisValues)).setHasLines(true).setTextColor(Color.DKGRAY); //new Axis(axisValues);
-        Axis chart1AxisY = Axis.generateAxisFromRange(0,300,10).setHasLines(true).setTextColor(Color.DKGRAY);
+        Axis chart1AxisY = Axis.generateAxisFromRange(0,360,10).setHasLines(true).setTextColor(Color.DKGRAY);
 
         axisX.setName("Date");
         chart1AxisY.setName("Average match score");

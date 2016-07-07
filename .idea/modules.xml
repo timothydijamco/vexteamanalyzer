@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VEXTeamAnalyzer.iml" filepath="$PROJECT_DIR$/VEXTeamAnalyzer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vexteamanalyzer.iml" filepath="$PROJECT_DIR$/vexteamanalyzer.iml" />
     </modules>
   </component>
 </project>
-
