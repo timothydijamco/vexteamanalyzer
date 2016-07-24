@@ -42,8 +42,10 @@ public class ProcessActivity extends ActionBarActivity {
     private static final String TAG = "ProcessActivityTag";
     private int[] unixTimes = {1398902400,1401580800,1404172800,1406851200,1409529600,1412121600,1414800000,1417392000,1420070400,1422748800,1425168000,1427846400,1430438400,1433116800};
     private int[] unixTimesNBN = {1430438400,1433116800,1435708800,1438387200,1441065600,1443657600,1446336000,1448928000,1451606400,1454284800,1456790400,1459468800,1462060800,1464739200};
+    private int[] unixTimesSS = {1462060800,1464739200,1467331200,1470009600,1472688000,1475280000,1477958400,1480550400,1483228800,1485907200,1488326400,1491004800,1493596800,1496275200};
     private String[] labels =    {"5/1/14","6/1/14","7/1/14","8/1/14","9/1/14","10/1/14","11/1/14","12/1/14","1/1/15","2/1/15","3/1/15","4/1/15","5/1/15","6/1/15"};
     private String[] labelsNBN = {"5/1/15","6/1/15","7/1/15","8/1/15","9/1/15","10/1/15","11/1/15","12/1/15","1/1/16","2/1/16","3/1/16","4/1/16","5/1/16","6/1/16"};
+    private String[] labelsSS =  {"5/1/16","6/1/16","7/1/16","8/1/16","9/1/16","10/1/16","11/1/16","12/1/16","1/1/17","2/1/17","3/1/17","4/1/17","5/1/17","6/1/17"};
     private List<AxisValue> axisValues = new ArrayList<AxisValue>();
     private List<Event> events = new ArrayList<Event>();
     private Team team;
@@ -107,6 +109,10 @@ public class ProcessActivity extends ActionBarActivity {
         if (seasonReadable.equalsIgnoreCase("Nothing But Net")) {
             for (int k = 0; k < unixTimesNBN.length; k++) {
                 axisValues.add(new AxisValue(unixTimesNBN[k]).setLabel(labelsNBN[k]));
+            }
+        } else if (seasonReadable.equalsIgnoreCase("Starstruck")) {
+            for (int k = 0; k < unixTimesSS.length; k++) {
+                axisValues.add(new AxisValue(unixTimesSS[k]).setLabel(labelsSS[k]));
             }
         } else {
             for (int k = 0; k < unixTimes.length; k++) {
